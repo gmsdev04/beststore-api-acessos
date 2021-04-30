@@ -11,7 +11,15 @@ class LojasRepositoryMongoDb implements IAcessosRepository{
     constructor(){
         this._model = mongoose.model('acessos',acessosSchema);
     }
-    async getUsuarioById(id: String): Promise<any> {
+    async getAll(): Promise<any> {
+        return await this._model.find({});
+    }
+    async getAcessoByAtivo(ativo: Boolean): Promise<any> {
+        return await this._model.find({ativo:ativo})
+    }
+
+    
+    async getAcessoById(id: String): Promise<any> {
         return await this._model.findById(id);
     }
     

@@ -10,8 +10,16 @@ class AcessosServices {
         return await this.repository.create(novoAcesso);
     }
 
-    async getUsuarioById(id : String){
-        return await this.repository.getUsuarioById(id);
+    async getAcessoById(id : String){
+        return await this.repository.getAcessoById(id);
+    }
+
+    async getAcessoByAtivo(ativo : Boolean){
+        return await this.repository.getAcessoByAtivo(ativo);
+    }
+
+    async getAll(){
+        return await this.repository.getAll();
     }
 
    

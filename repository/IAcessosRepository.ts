@@ -1,7 +1,9 @@
 
 interface IAcessosRepository {
     create(novoAcesso : any): Promise<any>;
-    getUsuarioById(id : String): Promise<any>;
+    getAcessoById(id : String): Promise<any>;
+    getAcessoByAtivo(ativo : Boolean): Promise<any>;
+    getAll(): Promise<any>;
 }
 
 

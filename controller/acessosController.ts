@@ -1,5 +1,5 @@
 import AcessosService from '../services/acessosService'
-import { BaseHttpController, controller, httpDelete, httpGet, httpPatch, httpPost, requestBody, requestParam } from 'inversify-express-utils';
+import { BaseHttpController, controller, httpDelete, httpGet, httpPatch, httpPost, queryParam, requestBody, requestParam } from 'inversify-express-utils';
 import { inject } from 'inversify';
 
 @controller('/api/v1/acessos')
@@ -22,9 +22,21 @@ class AcessosController extends BaseHttpController{
 
     @httpGet('/:id')
     async getById(@requestParam('id') id : String){
-        return await this.acessosService.getUsuarioById(id)
+        return await this.acessosService.getAcessoById(id)
         .then(result => this.ok({data : result}))
         .catch(error => this.internalServerError(error));
+    }
+
+    @httpGet('')
+    async list(@queryParam('ativo') ativo : Boolean){
+        if(ativo != null){
+            return await this.acessosService.getAcessoByAtivo(ativo)
+                .then(result => this.ok({data : result}))
+                .catch(error => this.internalServerError(error));
+        }
+        return await this.acessosService.getAll()
+            .then(result => this.ok({data : result}))
+            .catch(error => this.internalServerError(error)); 
     }
 
 }
